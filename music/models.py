@@ -14,7 +14,6 @@ class Singer(models.Model):
 
 class Song(models.Model):
     name = models.CharField(max_length=50)
-    singer = models.ManyToManyField(Singer, verbose_name='Исполнитель')
 
     def __str__(self):
         return self.name
@@ -27,7 +26,7 @@ class Song(models.Model):
 class Albom(models.Model):
     name = models.CharField('Название', max_length=50)
     singer = models.ForeignKey(Singer, verbose_name='Исполнитесь', on_delete=models.CASCADE)
-    song = models.ManyToManyField(Song, verbose_name='Песня')
+    songs = models.ManyToManyField(Song, verbose_name='Песня')
     date = models.DateField('Дата')
 
     def __str__(self):

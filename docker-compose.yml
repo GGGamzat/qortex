@@ -1,0 +1,23 @@
+services:
+  web-app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./qortex:/qortex/
+    container_name: qortex
+    command: /bin/sh -c "python manage.py makemigrations
+              && python manage.py migrate
+              && python manage.py shell -c \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@gmail.com', 'password')\"
+              && python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - database
+
+  database:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=dbname
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=pass
+    container_name: postgres_db

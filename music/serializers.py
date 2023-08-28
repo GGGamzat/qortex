@@ -11,10 +11,10 @@ class SingerSerializer(serializers.ModelSerializer):
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
-        fields = ('id', 'name', 'singer')
+        fields = ('id', 'name')
 
 
 class AlbomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Albom
-        fields = ('id', 'name', 'singer', 'song', 'date')
+        fields = ('id', 'name', 'singer', 'songs', 'date')
